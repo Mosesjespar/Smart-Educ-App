@@ -12,7 +12,7 @@ export default function Welcome({ navigation }) {
                     <View style={styles.btn}>
                         <Button mode="contained" onPress={() => navigation.navigate('SignUp')}
                             color={'#2196F3'}
-                            labelStyle={{ color: "white", fontSize: 16, letterSpacing: 2, fontWeight: 'bold' }}
+                            labelStyle={{ color: "white", fontSize: 16, letterSpacing: 2, fontWeight: 500 }}
                             dark={true}
                             contentStyle={{ width: '80vw' }}
                         >
@@ -22,7 +22,7 @@ export default function Welcome({ navigation }) {
                     <View style={styles.btn}>
                         <Button mode="outlined" onPress={() => navigation.navigate('SignIn')}
                             color={'white'}
-                            labelStyle={{ color: "#2196F3", fontSize: 16, letterSpacing: 2, fontWeight: 'bold' }}
+                            labelStyle={{ color: "#2196F3", fontSize: 16, letterSpacing: 1.2, fontWeight:500 }}
                             contentStyle={{ width: '80vw' }}
                             style={{borderColor:'#2196F3'}}>
                             Sign In
