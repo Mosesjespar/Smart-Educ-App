@@ -23,7 +23,8 @@ export default function Welcome({ navigation }) {
                         <Button mode="outlined" onPress={() => navigation.navigate('SignIn')}
                             color={'white'}
                             labelStyle={{ color: "#2196F3", fontSize: 16, letterSpacing: 2, fontWeight: 'bold' }}
-                            contentStyle={{ width: '80vw' }}>
+                            contentStyle={{ width: '80vw' }}
+                            style={{borderColor:'#2196F3'}}>
                             Sign In
                         </Button>
                     </View>
