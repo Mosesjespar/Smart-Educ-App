@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         minHeight:'100%',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: '20vmin',
+        paddingTop: '10vmin',
         marginBottom: '20vmin',
         backgroundColor: '#020742',
 
