@@ -37,7 +37,7 @@ export default function SignUp({ navigation }) {
                         fontWeight: 600,
                         fontSize: '4vmin',
                         paddingTop: 5
-                    }}>{resultMsg}</Text>
+                    }}></Text>
                     <View style={styles.reg}>
                         <Text style={{ fontSize: '4.2vmin' }}>Already Have An Account?</Text>
                         <TouchableOpacity
