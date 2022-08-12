@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Image, View, Text, TextInput, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import register from '../ApiServices/registerUser'
+import { Button } from "react-native-paper";
+
 export default function SignUp({ navigation }) {
     const [UserName, setUserName] = useState('');
     const [Password, setPassword] = useState('');
-    const [regResult ,setRegResult]=useState('')
+    const [regResult, setRegResult] = useState('')
     const data = {
         name: UserName,
         password: Password,
@@ -13,33 +15,37 @@ export default function SignUp({ navigation }) {
     return (
         <SafeAreaView>
             <ScrollView>
-
                 <View style={styles.container}>
                     <View>
-                        <Image source={require('../images/smart-edu-nbg.png')} style={styles.img} />
+                        <Image source={require('../images/logo.png')} style={styles.img} />
                         <TextInput style={styles.input} placeholder='User Name'
                             value={UserName}
                             onChangeText={(text) => setUserName(text)}
+                            placeholderTextColor={'#2196F3'}
                         />
                         <TextInput style={styles.input} placeholder='Password' secureTextEntry
                             value={Password}
                             onChangeText={(text) => setPassword(text)}
+                            placeholderTextColor={'#2196F3'}
                         />
                     </View>
 
-                    <TouchableOpacity onPress={() => { register(data) }}>
-                        <View style={styles.btn2}>
-                            <Text style={styles.btn2t}>REGISTER</Text>
-                        </View>
-                    </TouchableOpacity>
+                    <Button mode="contained" onPress={() => register(data)}
+                        color={'#2196F3'}
+                        labelStyle={{ color: "white", fontSize: 16, letterSpacing: 2, fontWeight: 500 }}
+                        contentStyle={{ width: '80vw', paddingTop: 5 }}
+                    >
+                        REGISTER
+                    </Button>
                     <Text style={{
                         color: 'green',
                         fontWeight: 600,
                         fontSize: '4vmin',
                         paddingTop: 5
-                    }}>{resultMsg}</Text>
+                    }}>{regResult}</Text>
                     <View style={styles.reg}>
-                        <Text style={{ fontSize: '4.2vmin' }}>Already Have An Account?</Text>
+                        <Text style={{ fontSize: '4.2vmin', color: 'white' }}>Already Have An Account? </Text>
+
                         <TouchableOpacity
                             onPress={() => navigation.navigate('SignIn')}
                         >
@@ -55,35 +61,35 @@ export default function SignUp({ navigation }) {
 
 const styles = StyleSheet.create({
     img: {
-        width: '50vmin',
-        height: '50vmin',
+        width: '48vw',
+        height: '48vh',
+        marginBottom: '2vmin',
         alignSelf: 'center',
     },
     input: {
-        fontSize: '4.6vmin',
+        backgroundColor: 'transparent',
+        borderColor: '#2196F3',
         borderWidth: 1,
-        borderColor: '#ddd',
+        color: '#2196F3',
+        borderRadius: 3,
+        fontSize: 16,
+        letterSpacing: 1.1,
+        fontWeight: 400,
         width: '80vw',
-        alignSelf: 'center',
-        marginTop: 5,
-        fontSize: '4vmin',
+        margin: 5,
+        height: 40,
         outlineStyle: 'none',
-        height: '9vmin',
-        paddingLeft: 10,
-        backgroundColor: '#ddd'
+        padding: 10
     },
     container: {
         flex: 1,
-        height: '100%',
-        borderWidth: 1,
-        borderRadius: 3,
-        borderColor: '#ddd',
-        textAlign: 'center',
+        width: '100%',
+        minHeight: '100%',
+        alignItems: 'center',
         justifyContent: 'center',
-        shadowOffset: { width: 0, height: 1.3 },
-        shadowOpacity: 0.1,
-        paddingBottom: '20vmin',
-        backgroundColor: 'white'
+        // paddingTop: '20vmin',
+        marginBottom: '20vmin',
+        backgroundColor: '#020742'
     },
     reg: {
         flex: 1,
@@ -96,26 +102,5 @@ const styles = StyleSheet.create({
         color: '#2196F3',
         fontSize: '4.2vmin',
         fontWeight: 'bold'
-    },
-
-    btn2: {
-        textAlign: 'center',
-        marginTop: 5,
-        justifyContent: 'center',
-        flex: 1
-
-    },
-    btn2t: {
-        fontWeight: 500,
-        padding: 7,
-        width: '80vw',
-        fontSize: '4.6vmin',
-        backgroundColor: '#2196F3',
-        color: 'white',
-        borderWidth: 1,
-        borderColor: '#ddd',
-        letterSpacing: 3,
-        alignSelf: 'center',
-
     },
 })
