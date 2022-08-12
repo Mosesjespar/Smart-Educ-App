@@ -6,7 +6,6 @@ import { Button } from "react-native-paper";
 export const base_url = 'http://127.0.0.1:5000'
 
 export default function SignIn({ navigation }) {
-    const [data, setData] = React.useState('n')
     const [UserName, setUserName] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [token, setToken] = React.useState('')
@@ -15,11 +14,7 @@ export default function SignIn({ navigation }) {
         username: UserName,
         passw: password
     }
-    React.useEffect(() => {
-        fetch(base_url + '/data'
-        ).then(data => data.json()).then(data => { setData(data.age) }).catch(e => console.log('an error: ', e))
 
-    }, [])
     const UserLogin = async (info) => {
         let opts = {
             method: "POST",
@@ -55,7 +50,7 @@ export default function SignIn({ navigation }) {
             ).catch(e => console.log('error:', e))
         }
         else{
-            setResultMsg('Please Connect to the Internet')
+            setResultMsg('Unable to Connect to the Internet')
         }
     }
     return (
