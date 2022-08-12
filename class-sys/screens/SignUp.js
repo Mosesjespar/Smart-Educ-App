@@ -43,6 +43,7 @@ export default function SignUp({ navigation }) {
                         fontSize: '4vmin',
                         paddingTop: 5
                     }}>{regResult}</Text>
+
                     <View style={styles.reg}>
                         <Text style={{ fontSize: '4.2vmin', color: 'white' }}>Already Have An Account? </Text>
 
