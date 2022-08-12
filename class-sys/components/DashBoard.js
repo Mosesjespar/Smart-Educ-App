@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, TextInput, Button } from "react-native";
 import { base_url } from "../screens/Login";
 
-export default function Dashboard({ route, navigation }) {
-    const { login_name, g } = route.params
-    console.log(login_name)
+export default function Dashboard() {
+    
     // const [name, setName] = useState(login_name)
 
     // setName('Moses')
@@ -29,7 +28,7 @@ export default function Dashboard({ route, navigation }) {
             <ScrollView>
                 <View style={styles.container}>
                     <View style={styles.header}>
-                        <Text style={styles.title}>Welcome Back {JSON.stringify(login_name)} d</Text>
+                        <Text style={styles.title}>Welcome Back </Text>
                     </View>
                     <Form />
                     <Button title="Get Marks" onPress={Get_Marks} />
