@@ -1,4 +1,4 @@
-import { base_url } from "../screens/Login";
+import { base_url } from "./BASE_URL"
 
 export default function register(info){
      fetch(base_url + '/register', {
