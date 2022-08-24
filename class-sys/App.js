@@ -2,7 +2,6 @@ import React from 'react'
 import Welcome from './screens/Welcome'
 import SignIn from './screens/Login';
 import SignUp from './screens/SignUp';
-import Dashboard from './components/DashBoard';
 import StudentOpts from './screens/StudentOpts';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
