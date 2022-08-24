@@ -1,9 +1,7 @@
 import React from "react";
 import { Image, View, Text, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, TextInput } from "react-native";
 import { Button } from "react-native-paper";
-
-
-export const base_url = 'http://127.0.0.1:5000'
+import { base_url } from "../ApiServices/BASE_URL";
 
 export default function SignIn({ navigation }) {
     const [UserName, setUserName] = React.useState('');

@@ -1,6 +1,9 @@
 import React from "react";
-import { Image, View, Text, ScrollView, SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
+import { Image, View, Text, ScrollView, SafeAreaView, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
+
+
+
 export default function Welcome({ navigation }) {
     return (
         <SafeAreaView>
@@ -9,35 +12,51 @@ export default function Welcome({ navigation }) {
                     <Text style={styles.weltxt}>Hey There!</Text>
                     <Text style={styles.weltxt}>Welcome to Smart education</Text>
                     <Image source={require('../images/logo.png')} style={styles.img} />
-                    <View style={styles.btn}>
-                        <Button mode="contained" onPress={() => navigation.navigate('SignUp')}
-                            color={'#2196F3'}
-                            labelStyle={{ color: "white", fontSize: 16, letterSpacing: 2, fontWeight: 500 }}
-                            dark={true}
-                            contentStyle={{ width: '80vw' }}
-                        >
-                            Sign Up
-                        </Button>
-                    </View>
-                    <View style={styles.btn}>
-                        <Button mode="outlined" onPress={() => navigation.navigate('SignIn')}
-                            color={'white'}
-                            labelStyle={{ color: "#2196F3", fontSize: 16, letterSpacing: 1.2, fontWeight:500 }}
-                            contentStyle={{ width: '80vw' }}
-                            style={{borderColor:'#2196F3'}}>
-                            Sign In
-                        </Button>
-                    </View>
+
+                    <Text style={styles.weltxt}>You are a...</Text>
+
+                    <LightBlueBtn title='STUDENT' navPress={() => navigation.navigate('studentopts')} />
+
+                    <DarkBlueBtn title='TEACHER' navPress={() => navigation.navigate('teacheropts')} />
+
                 </View>
             </ScrollView>
         </SafeAreaView>
     )
 }
-const styles = StyleSheet.create({
+export function LightBlueBtn(props) {
+    return (
+        <View style={{ padding: 5, margin: 1 }}>
+            <Button mode="contained" onPress={props.navPress}
+                color={'#2196F3'}
+                labelStyle={{ color: "white", fontSize: 16, letterSpacing: 2, fontWeight: 500 }}
+                dark={true}
+                contentStyle={{ width: '80vw' }}
+            >
+                {props.title}
+            </Button>
+        </View>
+    )
+}
+
+export function DarkBlueBtn(props) {
+    return (
+        <View style={{ padding: 5, margin: 1 }}>
+            <Button mode="outlined" onPress={props.navPress}
+                color={'white'}
+                labelStyle={{ color: "#2196F3", fontSize: 16, letterSpacing: 1.2, fontWeight: 500 }}
+                contentStyle={{ width: '80vw' }}
+                style={{ borderColor: '#2196F3' }}>
+                {props.title}
+            </Button>
+        </View>
+    )
+}
+export const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        minHeight:'100%',
+        minHeight: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: '10vmin',
@@ -55,13 +74,9 @@ const styles = StyleSheet.create({
     img: {
         width: '48vw',
         height: '48vh',
-        margin: '2vmin',
+        // margin: '1vmin',
         alignSelf: 'center',
-        // resizeMode:'contain'
+        resizeMode: 'cover'
     },
-    btn:{
-        padding:5,
-        margin:1
-    }
 
 })
