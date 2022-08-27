@@ -10,8 +10,8 @@ export default function Welcome({ navigation }) {
             <ScrollView>
                 <View style={styles.container}>
                     <Text style={styles.weltxt}>Hey There!</Text>
-                    <Text style={styles.weltxt}>Welcome to Smart education</Text>
-                    <Image source={require('../images/logo.png')} style={styles.img} />
+                    <Text style={styles.weltxt}>Welcome to Study Life</Text>
+                    <Image source={require('../images/main-logo.png')} style={styles.img} />
 
                     <Text style={styles.weltxt}>You are a...</Text>
 

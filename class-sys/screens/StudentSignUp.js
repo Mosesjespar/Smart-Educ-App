@@ -25,9 +25,14 @@ export default function StudentSignUp({ navigation }) {
     const [pin2BorderWidth, setpin2BorderWidth] = useState(1)
     const [pickerBorder, setPickerBorder] = useState('#2196F3')
     const [pickerBorderWidth, setPickerBorderWidth] = useState(1)
+    const [confirmedPin, setConfirmedPin] = useState('')
 
-
-
+    const studentData = {
+        first_name: FirstName.toUpperCase().trim(),
+        last_name: LastName.toUpperCase().trim(),
+        pin: Pin,
+        Class: Class,
+    }
     const styles = StyleSheet.create({
         fn: {
             backgroundColor: 'transparent',
@@ -108,9 +113,11 @@ export default function StudentSignUp({ navigation }) {
     })
 
     function confirmPin(pin1) {
+        setConfirmedPin(pin1)
         if (pin1 === Pin && Pin !== '') {
             setpin2Border('green')
             setErrormsg('')
+
         }
         else {
             setErrormsg('Pin codes do not match')
@@ -159,8 +166,14 @@ export default function StudentSignUp({ navigation }) {
         }
     }
     function submit() {
-        if (fnborder === 'green' && lnborder === 'green' && pin2Border === 'green' && pinBorder === 'green' && pickerBorder === 'green') {
-            setErrormsg('Valid Info')
+        if (fnborder === 'green' && lnborder === 'green' && Class !== '') {
+            if (Pin !== confirmedPin) {
+                setErrormsg('Pin codes do not match')
+            }
+            else {
+                setErrormsg('Valid Info')
+                console.log(studentData)
+            }
         }
         else {
             setErrormsg('Please fill in valid information to all fields')
@@ -170,7 +183,6 @@ export default function StudentSignUp({ navigation }) {
     return (
         <>
             <HeaderOneBtn title='New Student' bgColor='#020742' navPress={() => navigation.navigate('studentopts')} />
-
             <ScrollView>
                 <View style={gstyles.register_container}>
                     <Text style={{
@@ -178,7 +190,8 @@ export default function StudentSignUp({ navigation }) {
                         textAlign: 'center',
                         color: '#41aafa',
                         fontSize: 20,
-                        letterSpacing: 1.4
+                        letterSpacing: 1.4,
+                        marginBottom:10
                     }}>Fill in the Form</Text>
                     <View>
                         <TextInput style={styles.fn} placeholder='First Name'
@@ -192,7 +205,7 @@ export default function StudentSignUp({ navigation }) {
                             }}
                             onBlur={() => {
                                 setfnBorderWidth(1)
-                                setfnborder(fnborder)
+                                fnborder === 'yellow' ? setfnborder('#2196F3') : setfnborder(fnborder)
                             }}
                         />
                         <TextInput style={styles.ln} placeholder='Last Name'
@@ -206,17 +219,17 @@ export default function StudentSignUp({ navigation }) {
                             }}
                             onBlur={() => {
                                 setlnBorderWidth(1)
-                                setlnborder(lnborder)
+                                lnborder === 'yellow' ? setlnborder('#2196F3') : setlnborder(lnborder)
                             }}
                         />
                         <Picker
                             selectedValue={Class}
                             style={styles.classpicker}
                             onValueChange={(itemValue) => {
-                                if (Class === '') {
-                                    setClass(itemValue)
-                                    setPickerBorder('green')
-                                }
+                                setClass(itemValue)
+                                setPickerBorder('green')
+                                console.log(itemValue)
+
                             }}
                             onFocus={() => {
                                 setPickerBorderWidth(2)
@@ -250,10 +263,11 @@ export default function StudentSignUp({ navigation }) {
                             }}
                             onBlur={() => {
                                 setpinBorderWidth(1)
-                                setpinBorder(pinBorder)
+                                pinBorder === 'yellow' ? setpinBorder('#2196F3') : setpinBorder(lnborder)
                             }}
                         />
                         <TextInput style={styles.pin2input} placeholder='Confirm Pin Code' secureTextEntry
+                            value={confirmedPin}
                             onChangeText={(pin) => confirmPin(pin)}
                             placeholderTextColor={'#2196F3'}
                             onFocus={() => {
@@ -283,7 +297,7 @@ export default function StudentSignUp({ navigation }) {
                         paddingTop: 5
                     }}>{errormsg}</Text>
                 </View>
-
+                        
             </ScrollView>
         </>
     )

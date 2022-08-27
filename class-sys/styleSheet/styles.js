@@ -13,7 +13,7 @@ export const gstyles = StyleSheet.create({
     register_container: {
         flex: 1,
         width: '100%',
-        minHeight: '150%',
+        minHeight: '140%',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#020742',
