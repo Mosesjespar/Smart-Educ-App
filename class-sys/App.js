@@ -7,17 +7,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import StudentSignUp from './screens/StudentSignUp'
 import TeacherOpts from './screens/TeacherOpts';
+
+
 const Stack = createNativeStackNavigator()
+
+
 export default function App() {
-  const opts = {
-    headerStyle: {
-      backgroundColor: '#020742',
-      elevation: 0,
-      shadowOpacity: 0,
-      borderBottomWidth: 0,
-    },
-    headerTintColor: '#2196F3',
-  }
 
   return (
     <NavigationContainer>
@@ -49,8 +44,6 @@ export default function App() {
         }}
 
         />
-
-        <Stack.Screen name='Dashboard' component={Dashboard} options={{ headerShown: false }} />
 
       </Stack.Navigator>
     </NavigationContainer>
