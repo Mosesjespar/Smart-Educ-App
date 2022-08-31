@@ -1,5 +1,4 @@
 import sqlite3
-from Database import Student
 
 
 # created
@@ -31,4 +30,6 @@ def Teachers_table():
     )'''
     cur.execute(query)
     print('teachers table created')
+
+
 

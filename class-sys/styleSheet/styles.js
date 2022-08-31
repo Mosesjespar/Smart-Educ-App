@@ -16,16 +16,33 @@ export const gstyles = StyleSheet.create({
         minHeight: '140%',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#020742',
+        backgroundColor: '#0d47a1',
     },
+    
     studentOpts_container: {
         flex: 1,
         width: '100%',
         minHeight: '120%',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#020742',
+        backgroundColor: '#023e8a',
 
     },
-    
+    login:{
+        flex: 1,
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#023e8a',
+        
+    },
+    teacherOpts_container: {
+        flex: 1,
+        width: '100%',
+        minHeight: '120%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#023e8a',
+
+    }
 })

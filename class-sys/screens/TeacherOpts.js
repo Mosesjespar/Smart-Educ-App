@@ -9,15 +9,15 @@ export default function TeacherOpts({ navigation }) {
     return (
 
         <ScrollView>
-            <HeaderOneBtn title='Teacher' bgColor='#020742' navPress={() => navigation.navigate('Welcome')} />
-            <View style={gstyles.studentOpts_container}>
+            <HeaderOneBtn title='Teacher' bgColor='#023e8a' navPress={() => navigation.navigate('Welcome')} />
+            <View style={gstyles.teacherOpts_container}>
                 <Image source={require('../images/logo.png')} style={{
                     width: 250,
                     height: 250,
                     alignSelf: 'center',
                     resizeMode: 'cover'
                 }} />
-                <LightBlueBtn title='Register' navPress={() => console.log('yoo')} />
+                <LightBlueBtn title='Register' navPress={() => navigation.navigate('teacherSignUp')} />
                 <DarkBlueBtn title='Login' navPress={() => console.log('yoo')} />
 
             </View>
