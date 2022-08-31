@@ -7,16 +7,16 @@ export default function StudentOpts({ navigation }) {
     return (
 
         <ScrollView>
-            <HeaderOneBtn title='Student' bgColor='#020742' navPress={() => navigation.navigate('Welcome')} />
+            <HeaderOneBtn title='Student' bgColor='#023e8a' navPress={() => navigation.navigate('Welcome')} />
             <View style={gstyles.studentOpts_container}>
-                <Image source={require('../images/logo.png')} style={{
+                <Image source={require('../images/student-logo.png')} style={{
                     width: 250,
                     height: 250,
                     alignSelf: 'center',
                     resizeMode: 'cover'
                 }} />
                 <LightBlueBtn title='Register' navPress={() => navigation.navigate('studentSignUp')} />
-                <DarkBlueBtn title='Login' navPress={() => console.log('yoo')} />
+                <DarkBlueBtn title='Login' navPress={() => navigation.navigate('studentlogin')} />
 
             </View>
         </ScrollView>
