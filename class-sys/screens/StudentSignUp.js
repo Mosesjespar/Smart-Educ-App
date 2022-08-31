@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Image, View, Text, TextInput, StyleSheet, ScrollView, Picker } from "react-native";
-import register from '../ApiServices/registerUser'
+import { View, Text, TextInput, StyleSheet, ScrollView, Picker } from "react-native";
 import { Button } from "react-native-paper";
 import { gstyles } from '../styleSheet/styles'
 import validatePin from "../utils/Pin validator";
 import { HeaderOneBtn } from "./StudentOpts";
 import validateName from "../utils/Validate UserName";
-
+import { base_url } from "../ApiServices/BASE_URL";
 
 export default function StudentSignUp({ navigation }) {
 
@@ -14,31 +13,35 @@ export default function StudentSignUp({ navigation }) {
     const [LastName, setLastName] = useState('')
     const [Class, setClass] = useState('')
     const [Pin, setPin] = useState('')
-    const [pinBorder, setpinBorder] = useState('#2196F3')
-    const [pin2Border, setpin2Border] = useState('#2196F3')
-    const [fnborder, setfnborder] = useState('#2196F3')
-    const [lnborder, setlnborder] = useState('#2196F3')
+    const [gender, setGender] = useState('')
+    const [genderBorder, setGenderBorder] = useState('#03045e')
+    const [genderWidth, setGenderWidth] = useState(1)
+    const [pinBorder, setpinBorder] = useState('#03045e')
+    const [pin2Border, setpin2Border] = useState('#03045e')
+    const [fnborder, setfnborder] = useState('#03045e')
+    const [lnborder, setlnborder] = useState('#03045e')
     const [errormsg, setErrormsg] = useState('')
     const [fnBorderWidth, setfnBorderWidth] = useState(1)
     const [lnBorderWidth, setlnBorderWidth] = useState(1)
     const [pinBorderWidth, setpinBorderWidth] = useState(1)
     const [pin2BorderWidth, setpin2BorderWidth] = useState(1)
-    const [pickerBorder, setPickerBorder] = useState('#2196F3')
+    const [pickerBorder, setPickerBorder] = useState('#03045e')
     const [pickerBorderWidth, setPickerBorderWidth] = useState(1)
     const [confirmedPin, setConfirmedPin] = useState('')
-
+    const [msgColor, setMsgColor] = useState('#ff0000')
     const studentData = {
         first_name: FirstName.toUpperCase().trim(),
         last_name: LastName.toUpperCase().trim(),
         pin: Pin,
         Class: Class,
+        gender: gender.charAt(0).toUpperCase()
     }
     const styles = StyleSheet.create({
         fn: {
             backgroundColor: 'transparent',
             borderColor: fnborder,
             borderWidth: fnBorderWidth,
-            color: '#2196F3',
+            color: 'white',
             borderRadius: 3,
             fontSize: 16,
             letterSpacing: 1.1,
@@ -53,7 +56,7 @@ export default function StudentSignUp({ navigation }) {
             backgroundColor: 'transparent',
             borderColor: lnborder,
             borderWidth: lnBorderWidth,
-            color: '#2196F3',
+            color: 'white',
             borderRadius: 3,
             fontSize: 16,
             letterSpacing: 1.1,
@@ -68,7 +71,7 @@ export default function StudentSignUp({ navigation }) {
             backgroundColor: 'transparent',
             borderColor: pinBorder,
             borderWidth: pinBorderWidth,
-            color: '#2196F3',
+            color: 'white',
             borderRadius: 3,
             fontSize: 16,
             letterSpacing: 1.1,
@@ -83,7 +86,7 @@ export default function StudentSignUp({ navigation }) {
             backgroundColor: 'transparent',
             borderColor: pin2Border,
             borderWidth: pin2BorderWidth,
-            color: '#2196F3',
+            color: 'white',
             borderRadius: 3,
             fontSize: 16,
             letterSpacing: 1.1,
@@ -99,7 +102,22 @@ export default function StudentSignUp({ navigation }) {
             borderColor: pickerBorder,
             borderWidth: pickerBorderWidth,
             backgroundColor: 'transparent',
-            color: '#2196F3',
+            color: '#03045e',
+            borderRadius: 3,
+            fontSize: 16,
+            letterSpacing: 1.1,
+            fontWeight: 400,
+            width: '80vw',
+            margin: 5,
+            outlineStyle: 'none',
+            padding: 8,
+        },
+        genderPicker: {
+            flex: 1,
+            borderColor: genderBorder,
+            borderWidth: genderWidth,
+            backgroundColor: 'transparent',
+            color: '#03045e',
             borderRadius: 3,
             fontSize: 16,
             letterSpacing: 1.1,
@@ -115,92 +133,112 @@ export default function StudentSignUp({ navigation }) {
     function confirmPin(pin1) {
         setConfirmedPin(pin1)
         if (pin1 === Pin && Pin !== '') {
-            setpin2Border('green')
+            setpin2Border('#16db65')
             setErrormsg('')
 
         }
         else {
             setErrormsg('Pin codes do not match')
-            setpin2Border('red')
+            setpin2Border('#ff0000')
         }
     }
     function validPin(vpin) {
         setPin(vpin)
         if (validatePin(vpin)) {
-            setpinBorder('green')
+            setpinBorder('#16db65')
             setErrormsg('')
         }
         else {
-            setpinBorder('red')
+            setpinBorder('#ff0000')
             setErrormsg('Pin Code should be 4 or 6 digits')
         }
     }
     function validateFirstName(text) {
         setFirstName(text)
         if (validateName(text)) {
-            setfnborder('green')
+            setfnborder('#16db65')
             setErrormsg('')
         }
         else if (text.length < 4) {
-            setfnborder('red')
+            setfnborder('#ff0000')
             setErrormsg('Too Short')
         }
         else {
-            setfnborder('red')
+            setfnborder('#ff0000')
             setErrormsg('First Name Should only have letters and no spaces')
         }
     }
     function validateLastName(text) {
         setLastName(text)
         if (validateName(text)) {
-            setlnborder('green')
+            setlnborder('#16db65')
             setErrormsg('')
         }
         else if (text.length < 4) {
-            setlnborder('red')
+            setlnborder('#ff0000')
             setErrormsg('Too Short')
         }
         else {
-            setlnborder('red')
+            setlnborder('#ff0000')
             setErrormsg('First Name Should only have letters and no spaces')
         }
     }
     function submit() {
-        if (fnborder === 'green' && lnborder === 'green' && Class !== '') {
-            if (Pin !== confirmedPin) {
-                setErrormsg('Pin codes do not match')
-            }
-            else {
-                setErrormsg('Valid Info')
-                console.log(studentData)
-            }
+        if (fnborder === '#16db65' && lnborder === '#16db65' && Class !== '' && gender !== '') {
+
+            Pin !== confirmedPin ? setErrormsg('Pin codes do not match') : registerStudent(studentData)
+
         }
+
         else {
             setErrormsg('Please fill in valid information to all fields')
         }
     }
 
+
+    function registerStudent(data) {
+        fetch(base_url + '/register', {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json' }
+        }).then(
+            response => response.status === 200 ? response.json() : setErrormsg('An Error Occured'))
+            .then(
+                data => {
+                    console.log(data)
+                    setMsgColor('#16db65')
+                    setErrormsg('Registered Succesfully')
+                    setTimeout(() => console.log('Done Registering'), 2000)
+                }
+            ).catch(
+                error => {
+                    console.log('error', error)
+                    setErrormsg('An Error Occured')
+                }
+            )
+    }
     return (
         <>
-            <HeaderOneBtn title='New Student' bgColor='#020742' navPress={() => navigation.navigate('studentopts')} />
+            <HeaderOneBtn title='New Student' bgColor='#023e8a' navPress={() => navigation.navigate('studentopts')} />
             <ScrollView>
                 <View style={gstyles.register_container}>
                     <Text style={{
                         fontWeight: 'bold',
                         textAlign: 'center',
-                        color: '#41aafa',
+                        color: '#fff',
                         fontSize: 20,
                         letterSpacing: 1.4,
-                        marginBottom:10
+                        marginBottom: 10,
+                        marginTop: -39
                     }}>Fill in the Form</Text>
                     <View>
                         <TextInput style={styles.fn} placeholder='First Name'
                             value={FirstName}
                             onChangeText={(text) => validateFirstName(text)}
-                            placeholderTextColor={'#2196F3'}
+                            placeholderTextColor={'white'}
                             onFocus={() => {
                                 setfnBorderWidth(2)
-                                fnborder === 'green' ? setfnborder('green') : fnborder === 'red' ? setfnborder('red') : setfnborder('yellow')
+                                fnborder === '#16db65' ? setfnborder('#16db65') : fnborder === '#ff0000' ? setfnborder('#ff0000') : setfnborder('yellow')
 
                             }}
                             onBlur={() => {
@@ -210,11 +248,11 @@ export default function StudentSignUp({ navigation }) {
                         />
                         <TextInput style={styles.ln} placeholder='Last Name'
                             value={LastName}
-                            placeholderTextColor={'#2196F3'}
+                            placeholderTextColor={'white'}
                             onChangeText={(text) => validateLastName(text)}
                             onFocus={() => {
                                 setlnBorderWidth(2)
-                                lnborder === 'green' ? setlnborder('green') : lnborder === 'red' ? setlnborder('red') : setlnborder('yellow')
+                                lnborder === '#16db65' ? setlnborder('#16db65') : lnborder === '#ff0000' ? setlnborder('#ff0000') : setlnborder('yellow')
 
                             }}
                             onBlur={() => {
@@ -227,7 +265,7 @@ export default function StudentSignUp({ navigation }) {
                             style={styles.classpicker}
                             onValueChange={(itemValue) => {
                                 setClass(itemValue)
-                                setPickerBorder('green')
+                                setPickerBorder('#16db65')
                                 console.log(itemValue)
 
                             }}
@@ -249,16 +287,38 @@ export default function StudentSignUp({ navigation }) {
                             <Picker.Item label="Senior Five" value="S5" />
                             <Picker.Item label="Senior Six" value="S6" />
 
+
                         </Picker>
 
+                        <Picker
+                            selectedValue={gender}
+                            style={styles.genderPicker}
+                            onValueChange={(itemValue) => {
+                                setGender(itemValue)
+                                setGenderBorder('#16db65')
+                                console.log(itemValue)
 
+                            }}
+                            onFocus={() => {
+                                setGenderWidth(2)
+                                setGenderBorder('yellow')
+
+                            }}
+                            onBlur={() => {
+                                setGenderWidth(1)
+                                setGenderBorder(genderBorder)
+                            }}>
+                            <Picker.Item label="Gender" value="" />
+                            <Picker.Item label="Male" value="male" />
+                            <Picker.Item label="Female" value="female" />
+                        </Picker>
                         <TextInput style={styles.pininput} placeholder='Pin Code 4 or 6 digits' secureTextEntry
                             value={Pin}
                             onChangeText={(pin) => validPin(pin)}
-                            placeholderTextColor={'#2196F3'}
+                            placeholderTextColor={'white'}
                             onFocus={() => {
                                 setpinBorderWidth(2)
-                                pinBorder === 'green' ? setpinBorder('green') : pinBorder === 'red' ? setpinBorder('red') : setpinBorder('yellow')
+                                pinBorder === 'green' ? setpinBorder('green') : pinBorder === '#ff0000' ? setpinBorder('#ff0000') : setpinBorder('yellow')
 
                             }}
                             onBlur={() => {
@@ -269,10 +329,10 @@ export default function StudentSignUp({ navigation }) {
                         <TextInput style={styles.pin2input} placeholder='Confirm Pin Code' secureTextEntry
                             value={confirmedPin}
                             onChangeText={(pin) => confirmPin(pin)}
-                            placeholderTextColor={'#2196F3'}
+                            placeholderTextColor={'white'}
                             onFocus={() => {
                                 setpin2BorderWidth(2)
-                                pin2Border === 'green' ? setpin2Border('green') : pin2Border === 'red' ? setpin2Border('red') : setpin2Border('yellow')
+                                pin2Border === 'green' ? setpin2Border('green') : pin2Border === '#ff0000' ? setpin2Border('#ff0000') : setpin2Border('yellow')
 
                             }}
                             onBlur={() => {
@@ -283,7 +343,7 @@ export default function StudentSignUp({ navigation }) {
                     </View>
 
                     <Button mode="contained" onPress={() => submit()}
-                        color={'#2196F3'}
+                        color={'#03045e'}
                         labelStyle={{ color: "white", fontSize: 16, letterSpacing: 2, fontWeight: 500 }}
                         contentStyle={{ width: '80vw', paddingTop: 5 }}
 
@@ -291,13 +351,13 @@ export default function StudentSignUp({ navigation }) {
                         SUBMIT
                     </Button>
                     <Text style={{
-                        color: 'red',
+                        color: msgColor,
                         fontWeight: 400,
                         fontSize: '4.4vmin',
                         paddingTop: 5
                     }}>{errormsg}</Text>
                 </View>
-                        
+
             </ScrollView>
         </>
     )
