@@ -32,4 +32,18 @@ def Teachers_table():
     print('teachers table created')
 
 
+# created
+def Class_Teachers():
+    conn = sqlite3.connect('school.db')
+    cur = conn.cursor()
+    query = '''CREATE TABLE classTeachers(
+                    First_Name VARCHAR NOT NULL,
+                    Last_Name VARCHAR NOT NULL,
+                    Class VARCHAR NOT NULL
+        )'''
+    cur.execute(query)
+    print('Class teachers table created')
 
+
+def Marks_Table():
+    pass
